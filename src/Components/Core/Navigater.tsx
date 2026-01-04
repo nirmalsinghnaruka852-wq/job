@@ -1,37 +1,25 @@
-import { Route } from "react-router-dom";
+import { useMemo } from "react";
+import Icon, { type IconName } from "./Icon";
 
 
 
-type NavigaterProps ={
-    title: string ; 
-    route :string ; 
-    onClick: ()=> void 
-
+type NavigatorProps = React.HTMLAttributes<HTMLDivElement>&{
+ title: string
+ iconName ?:IconName
 }
 
 
-function  Navigater({title , route ='/' , onClick,}:NavigaterProps){
-  return <>
-  <div   onClick={()=>onClick(Route)} className="w-full p-1">
-    <div className="flex-col ">
-        <div className="flex-row justify-end align-items-center">
-      
-        </div>
-    <div>
-     {NavLink.map(()=>{
-        
-     })}
-
+function  Navigator({title, iconName,...props}:NavigatorProps){
+    const name  = useMemo(()=>iconName ?? 'AlignLeftIcon',[iconName]) 
+  return (
+    <div className="w-full p-2 flex justify-between " {...props}>
+     <div>{ title }</div>
+     <div>
+        <Icon name={name} size={20}/>
+     </div>
     </div>
-    <div>
-        {/*  here the title  */}
-    </div>
-    </div>
-    </div></>
-
-
-
+  )
 }
 
 
-export  default Navigater
+export  default Navigator

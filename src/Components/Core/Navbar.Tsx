@@ -1,32 +1,56 @@
-import { useState } from "react"
-import IsWhen from './Iswhen'
-import SideBar from "./SideBar"
+import { Fragment, useState } from "react";
+import IsWhen from "./Iswhen";
+import SideBar from "./SideBar";
+import { NavLinks, NavLinksLogo, RoutePath } from "../../utils/Constant/NavLink";
+import IconButton from "../Button/IconButton";
+import { useNavigation } from "../../Hooks/useNavigation";
 
-function Navbar(){
-   const [isShow , setisShow ]= useState<boolean>(false)
-  const Changer =()=>{
+export default function Navbar() {
+  const [isShow, setIsShow] = useState(false);
+  const { go } = useNavigation();
 
-  }
-    return <>
-    <div>
-        <div>
-            <div>
-                <div>
-                {/*  here logo  */}
-                </div>
-                <div>
-                    {/*  here we will map the data  */}
-                </div>
-            </div>
-            <div>
-                {/* here the all logo of the    navgation  */}
-            </div>
-        </div>
-    </div>
+  const toggleSidebar = () => setIsShow((v) => !v);
 
-    <IsWhen when={isShow}>
-     {() => <SideBar/> }
-    </IsWhen>
-    </>
-    
+  return (
+    <nav className="flex items-center justify-between p-4 bg-white shadow">
+      {/* Logo */}
+      <div className="logo">LOGO</div>
+
+      {/* Nav Links */}
+      <div className="hidden md:flex space-x-4">
+        {NavLinks.map(({ name, path }) => (
+            <Fragment key={path}>
+          <button
+            onClick={() => go(path)}
+            className="px-3 py-2 hover:bg-gray-100 rounded"
+          >
+            {name}
+          </button>
+          <div></div>
+          </Fragment>
+        ))}
+      </div>
+
+      {/* Nav Icons */}
+      <div className="flex space-x-2">
+        {NavLinksLogo.map(({ name, path }) => (
+            <Fragment key={path}>
+          <button
+            key={path}
+            onClick={() => go(path as RoutePath) }
+            className="p-1 rounded hover:bg-gray-100"
+          >
+            <IconButton name={name} size={20}/>
+          </button>
+          <div></div>
+          </Fragment>
+        ))}
+      </div>
+
+      {/* Sidebar (mobile) */}
+      <IsWhen when={isShow}>
+        {()=> <SideBar close={close} go={go} />}
+      </IsWhen>
+    </nav>
+  );
 }

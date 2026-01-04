@@ -1,3 +1,5 @@
+import  { type IconName } from '../../Components/Core/Icon'
+
 export const NavLinks = [
   { name: 'Home', path: '/home' },
   { name: 'Company reviews', path: '/company-reviews' },
@@ -5,5 +7,22 @@ export const NavLinks = [
   { name: 'Profile', path: '/profile' },
 ] as const;
 
-export type RoutePath = typeof NavLinks[number]['path'];
+
+type NavLinksLogos = {
+  name: IconName
+  path: string
+}
+
+
+export const NavLinksLogo :NavLinksLogos[]= [  
+  { name: 'AArrowDown', path: '/home' },
+  { name: 'AArrowDown', path: '/company-reviews' },
+  { name: 'AArrowDown', path: '/salary-guide' },
+  { name: 'AArrowDown', path: '/profile' },
+
+]
+
+
+
+export type RoutePath = typeof NavLinks[number]['path'] & typeof NavLinksLogo[number]['path'] ;
 
