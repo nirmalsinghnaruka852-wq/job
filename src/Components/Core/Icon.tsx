@@ -1,7 +1,7 @@
 import * as Icons from 'lucide-react'
 import { useMemo, type ComponentProps, type FC } from 'react'
-import { useTheme } from '../../stores/theme/themeProvider'
-import { iconColors } from '../../stores/theme/constant'
+// import { useTheme } from '../../stores/theme/themeP/rovider'
+// import { iconColors } from '../../stores/theme/constant'
 
     export type IconName = keyof typeof Icons
 
@@ -11,10 +11,10 @@ import { iconColors } from '../../stores/theme/constant'
     color?: string
     }
 
-    function Icon({ name='Activity', size = 20, color  }: IconProps) {
-       const {theme} = useTheme()  
+    function Icon({ name='Activity', size = 20  }: IconProps) {
+      //  const {theme} = useTheme()  
      const LucideIcon   =useMemo(()=> Icons[name] as FC<ComponentProps<typeof Icons['Activity']>>, [name])  
-    return <LucideIcon size={size} color={color ??iconColors[theme]} />
+    return <LucideIcon size={size}  />
     }
 
     export default Icon
