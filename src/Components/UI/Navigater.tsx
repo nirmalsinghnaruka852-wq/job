@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Icon, { type IconName } from "./Icon";
+import { Icon, type IconName } from "../Core";
 
 
 

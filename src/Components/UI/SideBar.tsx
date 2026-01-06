@@ -1,6 +1,6 @@
 import { CrossIcon } from "lucide-react"
 import { NavLinks } from "../../utils/Constant/NavLink"
-import Navigater from "./Navigater"
+import Navigater from './Navigater'
 
 type SideBarProps = {
   close : () => void

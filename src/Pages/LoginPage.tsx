@@ -1,15 +1,8 @@
 import { useRef } from "react";
-import type { InputHandler } from "../Components/Input";
-import Input from "../Components/Input";
-
+import { Button, Input, type InputHandler } from "../Components/Core";
 function LoginPage() {
-
-
-
   const email = useRef<InputHandler>(null)
   const password = useRef<InputHandler>(null)
-
-
   const Handler =()=>{
 
   }
@@ -31,7 +24,7 @@ function LoginPage() {
               ref={email}
                 type="email"
                 placeholder="you@example.com"
-                className="rounded-md border border-gray-300 px-3 py-2 outline-none bg-blue-50 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="rounded-md border border-gray-300 px-3 py-2 outline-none bg-blue-50 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-full"
               />
             </div>
 
@@ -41,13 +34,13 @@ function LoginPage() {
               ref={password}
                 type="password"
                 placeholder="••••••••"
-                className="rounded-md border  border-gray-300 px-3 py-2 outline-none bg-blue-50"
+                className="rounded-md border  border-gray-300 px-3 py-2 outline-none bg-blue-50 w-full"
               />
             </div>
 
-            <button onClick={Handler} className="mt-2 rounded-md bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700">
-              Sign in
-            </button>
+            <Button title={"Sign in"} onClick={Handler} className="mt-2 rounded-md bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700"/>
+              
+    
           </div>
 
           <div className="mt-4 text-center text-sm text-gray-600">

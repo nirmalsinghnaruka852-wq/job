@@ -1,8 +1,5 @@
 import { useState, type HTMLAttributes } from "react";
-import IconButton from "../Button/IconButton";
-import IsWhen from "./Iswhen";
-import Icon from "./Icon";
-
+import { Icon, IconButton, IsWhen } from "../Core";
 type Active = "none" | "block";
 
 type JobProfileProps = HTMLAttributes<HTMLDivElement>;
