@@ -1,9 +1,10 @@
 // import JobProfile from "./Components/Core/JobProfile"
-import LoginPage from "./Pages/LoginPage"
+// import LoginPage from "./Pages/Index"
+import SignupPage from "./Pages/SignupPage/Index"
 
 function App(){
   return<>
-  <LoginPage></LoginPage>
+  <SignupPage></SignupPage>
   </>
 }
 

@@ -1,7 +1,5 @@
 import * as Icons from 'lucide-react'
 import { useMemo, type ComponentProps, type FC } from 'react'
-// import { useTheme } from '../../stores/theme/themeP/rovider'
-// import { iconColors } from '../../stores/theme/constant'
 
     export type IconName = keyof typeof Icons
 

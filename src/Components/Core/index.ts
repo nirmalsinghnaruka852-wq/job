@@ -5,3 +5,6 @@ export type { IconName ,IconProps } from "./Icon";
 export {default as IsWhen} from './Iswhen'
 export{default as Input  } from './Input'
 export type {InputHandler} from './Input'
+export {default as BaseInput} from './BaseInput'
+export type {BaseInputProps} from './BaseInput'
+export {default  as FormInput} from './FormInput'
