@@ -1,22 +1,23 @@
-type ButtonProps = {
-  title: string | number;
-  onClick?: (event :React.MouseEvent<HTMLButtonElement>) => void; 
-  className?: string;   
-  disabled?: boolean;    
-};
+import type { ButtonHTMLAttributes } from "react";
 
-function Button({ title, onClick, className, disabled , ...props}: ButtonProps) {
+  type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>,'onClick'>&{
+    title: string | number;
+    onClick?: (event :React.MouseEvent<HTMLButtonElement>) => void; 
+    className?: string;      
+  };
 
-  return (
-    <button
-      onClick={onClick}
-      className={`cursor-pointer ${className || ""}`}
-      disabled={disabled}
-      {...props}
-    >
-      {title}
-    </button>
-  );
-}
+  function Button({ title, onClick, className, ...props}: ButtonProps) {
 
-export default Button;
+    return (
+      <button
+        onClick={onClick}
+        className={`cursor-pointer ${className || ""}`}
+        disabled={props?.disabled}
+        {...props}
+      >
+        {title}
+      </button>
+    );
+  }
+
+  export default Button;

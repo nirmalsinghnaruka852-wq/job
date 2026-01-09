@@ -1,4 +1,4 @@
-// import SignupForm from "./SignupForm"
+
 import SignupFrom from "./SignupFrom"
 
 function SignupPage() {
@@ -7,6 +7,7 @@ function SignupPage() {
       <div className="flex flex-col md:flex-row w-full">
         {/* left part */}
         <div className="flex-1 flex justify-center items-center">
+          
           <SignupFrom />
         </div>
 
