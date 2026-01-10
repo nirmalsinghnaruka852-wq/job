@@ -1,10 +1,15 @@
-import {  useCallback, useEffect, useMemo, useRef } from "react";
-import {Button,Input, type InputHandler,} from "../../Components/Core";
-import { emailCheck, nameCheck, passwordCheck, type Validator } from "../../validators/index";
-export type FieldMapItem ={
-  ref: React.RefObject<InputHandler | null>
-  validator:Validator
-}
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { Button, Input, type InputHandler } from "../../Components/Core";
+import {
+  emailCheck,
+  nameCheck,
+  passwordCheck,
+  type Validator,
+} from "../../validators/index";
+export type FieldMapItem = {
+  ref: React.RefObject<InputHandler | null>;
+  validator: Validator;
+};
 
 function SignupFrom() {
   const nameRef = useRef<InputHandler>(null);
@@ -12,51 +17,47 @@ function SignupFrom() {
   const passwordRef = useRef<InputHandler>(null);
   const confirmPasswordRef = useRef<InputHandler>(null);
 
+  useEffect(() => {
+    return () => {
+      for (let field of fieldMap) field.ref.current?.setClear();
+    };
+  }, []);
 
-   useEffect(()=>{
+  const fieldMap: FieldMapItem[] = useMemo(
+    () => [
+      { ref: nameRef, validator: nameCheck },
+      { ref: emailRef, validator: emailCheck },
+      { ref: passwordRef, validator: passwordCheck },
+    ],
+    []
+  );
 
+  const Handler = useCallback(() => {
+    let hasError = false;
 
+    for (const field of fieldMap) {
+      const value = field.ref.current?.getValue() ?? "";
+      const error = field.validator(value);
+      field.ref.current?.setError(error);
 
-
-
-    return ()=>{
-      for(let field of fieldMap)   field.ref.current?.setClear()
+      if (error) hasError = true;
     }
-   },[])
 
-  const fieldMap :FieldMapItem[] =useMemo(()=> [
-  { ref: nameRef, validator: nameCheck },
-  { ref: emailRef, validator: emailCheck },
-  { ref: passwordRef, validator: passwordCheck },
-],[]) 
+    const passwordValue = passwordRef.current?.getValue() ?? "";
+    const confirmValue = confirmPasswordRef.current?.getValue() ?? "";
+    const confirmError =
+      passwordValue !== confirmValue ? "Passwords do not match" : undefined;
+    confirmPasswordRef.current?.setError(confirmError);
 
+    if (confirmError) hasError = true;
 
-const Handler = useCallback(() => {
-  let hasError = false;
+    if (hasError) return;
 
-  for (const field of fieldMap) {
-    const value = field.ref.current?.getValue() ?? "";
-    const error = field.validator(value);
-    field.ref.current?.setError(error);
+    console.log("All fields valid! Submit the form here.");
 
-    if (error) hasError = true;
-  }
+    //  now the remining is the api call and handling the api call
+  }, [fieldMap]);
 
-  const passwordValue = passwordRef.current?.getValue() ?? "";
-  const confirmValue = confirmPasswordRef.current?.getValue() ?? "";
-  const confirmError =
-    passwordValue !== confirmValue ? "Passwords do not match" : undefined;
-  confirmPasswordRef.current?.setError(confirmError);
-
-  if (confirmError) hasError = true;
-
-  if (hasError) return; 
-
-  console.log("All fields valid! Submit the form here.");
-
-  //  now the remining is the api call and handling the api call
-},[fieldMap]);
-  
   const confirmPasswordHandler = useCallback(() => {
     const password = passwordRef.current?.getValue() ?? "";
     const confirmPassword = confirmPasswordRef.current?.getValue() ?? "";
@@ -64,7 +65,7 @@ const Handler = useCallback(() => {
       confirmPasswordRef.current?.setError("password not match");
     }
     return;
-  },[]);
+  }, []);
 
   return (
     <div className="w-full  rounded-lg bg-white p-8">
