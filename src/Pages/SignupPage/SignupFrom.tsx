@@ -1,7 +1,7 @@
-import {  useRef } from "react";
+import {  useCallback, useEffect, useMemo, useRef } from "react";
 import {Button,Input, type InputHandler,} from "../../Components/Core";
 import { emailCheck, nameCheck, passwordCheck, type Validator } from "../../validators/index";
-type FieldMapItem ={
+export type FieldMapItem ={
   ref: React.RefObject<InputHandler | null>
   validator:Validator
 }
@@ -13,14 +13,25 @@ function SignupFrom() {
   const confirmPasswordRef = useRef<InputHandler>(null);
 
 
-  const fieldMap :FieldMapItem[] =  [
+   useEffect(()=>{
+
+
+
+
+
+    return ()=>{
+      for(let field of fieldMap)   field.ref.current?.setClear()
+    }
+   },[])
+
+  const fieldMap :FieldMapItem[] =useMemo(()=> [
   { ref: nameRef, validator: nameCheck },
   { ref: emailRef, validator: emailCheck },
   { ref: passwordRef, validator: passwordCheck },
-]
+],[]) 
 
 
-const Handler = () => {
+const Handler = useCallback(() => {
   let hasError = false;
 
   for (const field of fieldMap) {
@@ -44,21 +55,16 @@ const Handler = () => {
   console.log("All fields valid! Submit the form here.");
 
   //  now the remining is the api call and handling the api call
-};
-
-
-
-
-
+},[fieldMap]);
   
-  const confirmPasswordHandler = () => {
+  const confirmPasswordHandler = useCallback(() => {
     const password = passwordRef.current?.getValue() ?? "";
     const confirmPassword = confirmPasswordRef.current?.getValue() ?? "";
     if (password != confirmPassword) {
-      confirmPasswordRef.current?.setError("");
+      confirmPasswordRef.current?.setError("password not match");
     }
     return;
-  };
+  },[]);
 
   return (
     <div className="w-full  rounded-lg bg-white p-8">
