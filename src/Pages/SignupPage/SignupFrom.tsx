@@ -1,5 +1,10 @@
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 import {Button,Input, type InputHandler,} from "../../Components/Core";
+import { emailCheck, nameCheck, passwordCheck, type Validator } from "../../validators/index";
+type FieldMapItem ={
+  ref: React.RefObject<InputHandler | null>
+  validator:Validator
+}
 
 function SignupFrom() {
   const nameRef = useRef<InputHandler>(null);
@@ -8,29 +13,41 @@ function SignupFrom() {
   const confirmPasswordRef = useRef<InputHandler>(null);
 
 
+  const fieldMap :FieldMapItem[] =  [
+  { ref: nameRef, validator: nameCheck },
+  { ref: emailRef, validator: emailCheck },
+  { ref: passwordRef, validator: passwordCheck },
+]
+
+
+const Handler = () => {
+  let hasError = false;
+
+  for (const field of fieldMap) {
+    const value = field.ref.current?.getValue() ?? "";
+    const error = field.validator(value);
+    field.ref.current?.setError(error);
+
+    if (error) hasError = true;
+  }
+
+  const passwordValue = passwordRef.current?.getValue() ?? "";
+  const confirmValue = confirmPasswordRef.current?.getValue() ?? "";
+  const confirmError =
+    passwordValue !== confirmValue ? "Passwords do not match" : undefined;
+  confirmPasswordRef.current?.setError(confirmError);
+
+  if (confirmError) hasError = true;
+
+  if (hasError) return; 
+
+  console.log("All fields valid! Submit the form here.");
+
+  //  now the remining is the api call and handling the api call
+};
 
 
 
-
-  useEffect(()=>{
-
-
-    return 
-  },[])
-
-  const Handler = () => {
-  
-  const name  =nameRef.current?.getValue() 
-  const email = emailRef.current?.getValue()
-  const password= passwordRef.current?.getValue()
-  const confirmPassword = confirmPasswordRef.current?.getValue()
-
-
-
-
-
-  
-  };
 
 
   

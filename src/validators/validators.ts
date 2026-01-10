@@ -1,4 +1,5 @@
-import type { Validator } from "../validators";
+import type { Validator } from "./index"
+
 export const  validators= (...validator:Validator[]) :Validator=>{
     return (value)=>{
         for(let i =0 ; i < validator.length ; i++){

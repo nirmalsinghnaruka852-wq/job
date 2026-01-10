@@ -8,14 +8,14 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {};
 export type InputHandler = {
   getValue: () => dataType;
   setValue: (val: dataType) => void;
-  setError: (msg: string) => void;
+  setError: (msg: string | undefined) => void;
   setClear: () => void;
 };
 
 const Input = forwardRef<InputHandler, InputProps>((props, ref) => {
   const [data, setData] = useState<dataType>("");
   const [showPassword, toggle] = useToggle(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const type =
     props.type === "password"
@@ -27,7 +27,7 @@ const Input = forwardRef<InputHandler, InputProps>((props, ref) => {
   useImperativeHandle(ref, () => ({
     getValue: () => data,
     setValue: (val: dataType) => setData(val),
-    setError: (msg: string) => setError(msg),
+    setError: (msg: string | undefined) => setError(msg),
     setClear: () => setData(""),
   }));
   const Handler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ const Input = forwardRef<InputHandler, InputProps>((props, ref) => {
         type={type}
         onChange={(event) => {
           Handler(event);
-          setError(null);
+          setError(undefined);
         }}
       />
       <IsWhen when={!!(props.type === "password")}>
@@ -58,7 +58,7 @@ const Input = forwardRef<InputHandler, InputProps>((props, ref) => {
           );
         }}
       </IsWhen>
-      <IsWhen when={error != null}>
+      <IsWhen when={!!error}>
         {() => <p className="text-red-500 text-sm">{error}</p>}
       </IsWhen>
     </div>
