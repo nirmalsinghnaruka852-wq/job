@@ -5,7 +5,7 @@ import { axiosInstance } from "./axiosInstance";
  * @param axiosConfig - Axios request config
  * @param timeout - time in ms to auto-cancel (default 10s)
  */
-export async function requestWithTimeout<T = any>(
+export async function c<T = any>(
   axiosConfig: Parameters<typeof axiosInstance.request>[0],
   timeout: number = 10000
 ): Promise<T> {
