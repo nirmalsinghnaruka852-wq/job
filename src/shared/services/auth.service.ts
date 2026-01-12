@@ -1,4 +1,4 @@
-import { requestWithTimeout } from "../utils/Axios/axiosRequest";
+import { requestWithTimeout } from "./../utils/axios/axiosRequest";
 export type SignupPayload = {
   name: string;
   email: string;
