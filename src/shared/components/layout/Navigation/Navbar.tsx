@@ -4,9 +4,9 @@ import {
   NavLinks,
   NavLinksLogo,
   type RoutePath,
-} from "../../../config/constants/NavLink";
-import { useNavigation } from "../../hooks";
-import { IconButton, IsWhen } from "../core";
+} from "../../../../config/constants/NavLink";
+import { useNavigation } from "../../../hooks";
+import { IconButton, IsWhen } from "../../core";
 
 export default function Navbar() {
   const [isShow, setIsShow] = useState(false);

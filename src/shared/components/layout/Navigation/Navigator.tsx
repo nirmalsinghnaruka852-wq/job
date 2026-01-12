@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Icon, type IconName } from "../core";
+import { Icon, type IconName } from "../../core";
 
 type NavigatorProps = React.HTMLAttributes<HTMLDivElement> & {
   title: string;

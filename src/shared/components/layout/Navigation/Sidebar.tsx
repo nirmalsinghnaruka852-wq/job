@@ -1,10 +1,10 @@
 import { CrossIcon } from "lucide-react";
-import { NavLinks } from "../../../config/constants/NavLink";
+import { NavLinks } from "../../../../config/constants/NavLink";
 import Navigater from "./Navigator";
 
 type SideBarProps = {
   close: () => void;
-  go: (path: import("../../../config/constants/NavLink").RoutePath) => void;
+  go: (path: import("../../../../config/constants/NavLink").RoutePath) => void;
 };
 
 function SideBar({ close, go }: SideBarProps) {
