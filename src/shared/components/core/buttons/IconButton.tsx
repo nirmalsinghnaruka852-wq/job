@@ -1,5 +1,5 @@
 import React from "react";
-import Icon, { type IconProps } from "../Core/Icon";
+import {  Icon,type IconProps } from "../index";
 
 type IconButtonProps = IconProps & {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

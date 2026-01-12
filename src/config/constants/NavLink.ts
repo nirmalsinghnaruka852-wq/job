@@ -1,4 +1,4 @@
-import  { type IconName } from '../../Components/Core/Icon'
+import  { type IconName } from './../../shared/components/core/index'
 
 export const NavLinks = [
   { name: 'Home', path: '/home' },
